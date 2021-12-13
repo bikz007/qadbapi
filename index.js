@@ -1,4 +1,4 @@
-const QUES_ANS_DB = require("../QuestionsAnswersDB.json");
+const QUES_ANS_DB = require("./QuestionsAnswersDB.json");
 const TOTAL_NUM_OF_QUESTIONS = QUES_ANS_DB.length;
 const express = require("express");
 const app = express();
