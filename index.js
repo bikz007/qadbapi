@@ -1,3 +1,6 @@
+'use strict';
+
+const path = require('path');
 const QUES_ANS_DB = require("./QuestionsAnswersDB.json");
 const TOTAL_NUM_OF_QUESTIONS = QUES_ANS_DB.length;
 const express = require("express");
@@ -15,6 +18,7 @@ with cross-origin resource sharing, it is okay for now.
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use('/', express.static(path.join(__dirname, 'testheroku')));
 
 app.get("/totalitems", (req, res) => {
   res.status(200);
@@ -31,8 +35,10 @@ app.get("/qna/:idx", (req, res) => {
     res.json({ message: "Invalid index, result not found." });
   }
 });
+
+const port = process.env.PORT || 4000;
 // in unix export QNA_API_PORT=<value>
 // in windows set QNA_API_PORT <value>
-app.listen(process.env.QNA_API_PORT || 4000, () => {
-  console.info(`QNA API running in ${process.env.QNA_API_PORT || 4000}`);
+app.listen(port, () => {
+  console.log(`QNA API running in ${port}`);
 });
